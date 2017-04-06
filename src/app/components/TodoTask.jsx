@@ -2,8 +2,9 @@ import React from "react";
 
 
 let TodoTasks = (props) => {
-    const inProgress = props.list.filter(task => task.status === 'todo');
+    const inProgress = props.taskList.filter(task => task.status === 'todo');
     let todoTasks = [];
+
     inProgress.map((task) => {todoTasks.push(
         <div className="task" key={task.id}>
             <h4>{task.description}</h4>

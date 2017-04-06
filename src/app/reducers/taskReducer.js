@@ -6,28 +6,28 @@ const defaultState = [
         description: "Clean room",
         prior: "low",
         status: 'todo',
-        date: new Date().getHours() + "." + new Date().getMinutes()
+        date: new Date().toTimeString().split(" ")[0].slice(0, -3)
     },
     {
         id: 2,
         description: "Do test task",
         prior: "hight",
         status: 'in progress',
-        date: new Date().getHours() + "." + new Date().getMinutes()
+        date: new Date().toTimeString().split(" ")[0].slice(0, -3)
     },
     {
         id: 3,
         description: "Walk",
         prior: "hight",
         status: 'aborted',
-        date: new Date().getHours() + "." + new Date().getMinutes()
+        date: new Date().toTimeString().split(" ")[0].slice(0, -3)
     },
     {
         id: 4,
         description: "have fun",
         prior: "hight",
         status: 'done',
-        date: new Date().getHours() + "." + new Date().getMinutes()
+        date: new Date().toTimeString().split(" ")[0].slice(0, -3)
     },
 ];
 
@@ -37,7 +37,9 @@ const taskReducer =  (state = defaultState, action) => {
             return state.concat(action.payload);
             break;
         case REMOVE_TASK:
-            return state.splice(action.payload, 1);
+            const taskId = action.payload;
+            console.log('Hello', taskId);
+            return state.filter(task => task.id !== taskId);
             break;
         case CHANGE_STATUS:
             return state.map((task) => {

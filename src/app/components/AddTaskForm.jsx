@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { addTask } from '../actions/userActions'
 
-let AddTask =  ({dispatch}) => {
+let AddTaskForm =  ({dispatch}) => {
     let input;
     let nextId = 5;
     return (
@@ -22,21 +22,21 @@ let AddTask =  ({dispatch}) => {
                                 if (!input.value.trim()) {
                                     return
                                 }
-                                dispatch(addTask({id: nextId++, description: input.value, prior: "low", status: 'todo', date:  new Date().getHours() + ":" + new Date().getMinutes()}));
+                                dispatch(addTask({id: nextId++, description: input.value, prior: "low", status: 'todo', date:  new Date().toTimeString().split(" ")[0].slice(0, -3) }));
                                 input.value = ''
                             }}>
                                 <div>
                                     <label>Description</label>
                                     <div>
-                                        <input ref={node => { input = node }} name="description" type="text" placeholder="Description"/>
+                                        <input className="form-control" ref={node => { input = node }} name="description" type="text" placeholder="Description"/>
                                     </div>
                                 </div>
                                 <div>
                                     <label>Prior</label>
                                     <div>
-                                        <label><input  name="prior" type="radio" value="low" />Low</label>
-                                        <label><input  name="prior" type="radio" value="normal" />Normal</label>
-                                        <label><input  name="prior" type="radio" value="hight" />Hight</label>
+                                        <label><input  name="prior" type="radio" value="low" />Low</label><br/>
+                                        <label><input  name="prior" type="radio" value="normal" />Normal</label><br/>
+                                        <label><input  name="prior" type="radio" value="hight" />Hight</label><br/>
                                     </div>
                                 </div>
                                 <div>
@@ -54,8 +54,8 @@ let AddTask =  ({dispatch}) => {
     );
 };
 
-AddTask = connect()(AddTask);
+AddTaskForm = connect()(AddTaskForm);
 
-export default AddTask;
+export default AddTaskForm;
 
 

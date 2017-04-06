@@ -1,7 +1,7 @@
 import React from "react";
 
 let AbortedTasks = (props) => {
-    let inProgress = props.list.filter(task => task.status === "aborted");
+    let inProgress = props.taskList.filter(task => task.status === "aborted");
     let abortedTasks = [];
 
     inProgress.map((task) => {abortedTasks.push(
@@ -13,7 +13,7 @@ let AbortedTasks = (props) => {
         )}
     );
 
-    return (<div>{abortedTasks}</div>)
+    return (<div>{abortedTasks.sort()}</div>)
 };
 
 export default AbortedTasks;

@@ -1,7 +1,7 @@
 import React from "react";
 
 let InProgressTasks = (props) => {
-    const inProgress = props.list.filter(task => task.status === "in progress");
+    const inProgress = props.taskList.filter(task => task.status === "in progress");
     let inProgressTasks = [];
     inProgress.map((task) => {inProgressTasks.push(
          <div className="task" key={task.id}>
