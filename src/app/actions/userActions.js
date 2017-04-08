@@ -1,4 +1,4 @@
-import { ADD_TASK, REMOVE_TASK, CHANGE_STATUS } from "../constants/Page.js"
+import { ADD_TASK, REMOVE_TASK, CHANGE_STATUS, CHANGE_TASK_DESCRIPTION } from '../constants/Page.js';
 
 /*
  * action creators
@@ -18,9 +18,19 @@ export const removeTask = (id) => {
     }
 };
 
-export const changeStatus = (id) => {
+export const changeStatus = (id, newTaskStatus) => {
     return {
         type: CHANGE_STATUS,
-        payload: id
+        payload: {
+            id,
+            newTaskStatus
+        }
+    }
+};
+
+export const changeTaskName = (newTaskName) => {
+    return {
+        type: CHANGE_TASK_DESCRIPTION,
+        payload: newTaskName
     }
 };

@@ -1,4 +1,28 @@
-.task {
+.low {
+    background-color: green;
     padding: 20px;
     border: 2px solid black;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.normal {
+    background-color: orange;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.hight {
+    background-color: darkred;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.task-description {
+    font-size: 30px;
+    font-weight: 600;
 }

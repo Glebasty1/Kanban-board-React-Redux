@@ -5,10 +5,10 @@ import { addTask } from '../actions/userActions'
 
 let AddTaskForm =  ({dispatch}) => {
     let input;
-    let nextId = 5;
+    let nextId = 20;
     return (
         <div>
-            <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Добавить</button>
+            <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Добавить</button>
             <div className="modal fade" id="myModal" role="dialog">
                 <div className="modal-dialog modal-md">
                     <div className="modal-content">
@@ -23,7 +23,9 @@ let AddTaskForm =  ({dispatch}) => {
                                     return
                                 }
                                 dispatch(addTask({id: nextId++, description: input.value, prior: "low", status: 'todo', date:  new Date().toTimeString().split(" ")[0].slice(0, -3) }));
-                                input.value = ''
+                                input.value = '';
+
+                                $('#myModal').modal('hide')
                             }}>
                                 <div>
                                     <label>Description</label>
@@ -39,6 +41,7 @@ let AddTaskForm =  ({dispatch}) => {
                                         <label><input  name="prior" type="radio" value="hight" />Hight</label><br/>
                                     </div>
                                 </div>
+                                <br/>
                                 <div>
                                     <button type="submit" className="btn btn-primary">Добавить</button>
                                 </div>

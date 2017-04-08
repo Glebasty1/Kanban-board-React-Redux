@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AddTaskForm from '../components/AddTaskForm.jsx';
-import TaskList from '../components/TaskList.jsx';
-import { removeTask, changeStatus } from '../actions/userActions';
-
+import AddTaskForm from '../components/AddTaskForm.js';
+import TaskList from '../components/TaskList.js';
+import { removeTask, changeStatus, changeTaskName } from '../actions/userActions';
 
 export class App extends React.Component {
     render() {
         return (
             <div className="container">
-                <TaskList removeTask={() => this.props.removeTask()} changeStatus={() => this.props.changeStatus()} taskList={this.props.tasks} />
+                <TaskList removeTask={this.props.removeTask} changeTaskName={this.props.changeTaskName} changeStatus={this.props.changeStatus} taskList={this.props.tasks} />
                 <br />
                 <AddTaskForm />
             </div>
@@ -20,7 +19,7 @@ export class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.task,
+        tasks: state,
     };
 };
 
@@ -31,6 +30,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeStatus: (id) => {
             dispatch(changeStatus(id))
+        },
+        changeTaskName: (newTaskName) => {
+            dispatch(changeTaskName(newTaskName))
         }
     };
 };
