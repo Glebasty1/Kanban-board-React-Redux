@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import { addTask } from '../actions/userActions'
 
-let AddTaskForm =  ({dispatch}) => {
+let EditTaskModal =  (props, {dispatch}) => {
     let input;
     let nextId = 20;
     return (
         <div>
-            <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add task</button>
-            <div className="modal fade" id="myModal" role="dialog">
+            <button type="button" className="btn btn-success btn-md" data-toggle="modal" data-target="#myModal2">Edit</button>
+            <div className="modal fade" id="myModal2" role="dialog">
                 <div className="modal-dialog modal-md">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -28,22 +28,18 @@ let AddTaskForm =  ({dispatch}) => {
                                 $('#myModal').modal('hide')
                             }}>
                                 <div>
-                                    <label>Description</label>
+                                    <label>{props.description}</label>
                                     <div>
                                         <input className="form-control" ref={node => { input = node }} name="description" type="text" placeholder="Description"/>
                                     </div>
                                 </div>
-                                <div>
-                                    <label>Prior</label>
-                                    <div>
-                                        <label><input  name="prior" type="radio" value="low"  />Low</label><br/>
-                                        <label><input  name="prior" type="radio" value="normal" />Normal</label><br/>
-                                        <label><input  name="prior" type="radio" value="hight" />Hight</label><br/>
-                                    </div>
-                                </div>
                                 <br/>
                                 <div>
-                                    <button type="submit" className="btn btn-primary">Add</button>
+                                    <button type="submit" className="btn btn-primary">Change description</button>
+                                    <br/><br/>
+                                    <button className="btn btn-primary">Change status to In Progress</button>
+                                    <br/><br/>
+                                    <button className="btn btn-primary">Change status to Aborted</button>
                                 </div>
                             </form>
                         </div>
@@ -57,8 +53,8 @@ let AddTaskForm =  ({dispatch}) => {
     );
 };
 
-AddTaskForm = connect()(AddTaskForm);
+EditTaskModal = connect()(EditTaskModal);
 
-export default AddTaskForm;
+export default EditTaskModal;
 
 

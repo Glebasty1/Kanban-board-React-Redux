@@ -1,35 +1,56 @@
 import React from "react";
+import Column from './Column';
 
-import TodoTasks from './TodoTask.js';
-import InProgressTask from './InProgressTask.js';
-import DoneTasks from './DoneTasks.js';
-import AbortedTasks from './AbortedTasks.js';
+const getItemsByStatus = (items, status) => {
+    return items.filter((item) => item.status === status);
+};
+
+const generateColumns = (columns) => {
+    return columns.map((column) => {
+        return (
+            <Column
+                key={column.name}
+                name={column.name}
+                items={column.items}
+                editCallback={column.editCallback}
+                deleteCallback={column.deleteCallback}
+            />
+        );
+    });
+};
 
 let TaskList = (props) => {
+    const columns = [
+        {
+            name: 'DO IT',
+            items: getItemsByStatus(props.taskList, 'todo'),
+            editCallback: props.changeStatus,
+        },
+        {
+            name: 'IN PROGRESS',
+            items: getItemsByStatus(props.taskList, 'in progress'),
+            editCallback: props.changeTaskName,
+        },
+        {
+            name: 'DONE',
+            items: getItemsByStatus(props.taskList, 'done'),
+            editCallback: props.changeStatus,
+            deleteCallback: props.removeTask
+        },
+        {
+            name: 'ABORTED',
+            items: getItemsByStatus(props.taskList, 'aborted'),
+            deleteCallback: props.removeTask
+        }
+    ];
     return (
-            <div className="container">
-                <div className="row">
-                        <h2 className="text-center">Kanban Board</h2>
-                    <div className="col-md-3">
-                         <h1>DO IT</h1>
-                        <TodoTasks changeStatus={props.changeStatus} taskList={props.taskList}/>
-                        <button onClick={() => props.changeTaskName("Learn Immutable.js")} className="btn btn-sm">Change name</button>
-                    </div>
-                    <div className="col-md-3">
-                        <h2>IN PROGRESS</h2>
-                        <InProgressTask changeStatus={props.changeStatus} taskList={props.taskList}/>
-                    </div>
-                    <div className="col-md-3">
-                        <h2>DONE</h2>
-                        <DoneTasks removeTask={props.removeTask} taskList={props.taskList}/>
-                    </div>
-                    <div className="col-md-3">
-                        <h2>ABORTED</h2>
-                        <AbortedTasks removeTask={props.removeTask} taskList={props.taskList}/>
-                    </div>
-                </div>
+        <div className="container">
+            <div className="row">
+                <h1 className="text-center">Kanban Board</h1>
+                {generateColumns(columns)}
             </div>
-        );
+        </div>
+    );
 };
 
 export default TaskList;

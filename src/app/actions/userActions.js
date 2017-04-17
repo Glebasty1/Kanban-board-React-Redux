@@ -18,19 +18,20 @@ export const removeTask = (id) => {
     }
 };
 
-export const changeStatus = (id, newTaskStatus) => {
+export const changeStatus = (id) => {
     return {
         type: CHANGE_STATUS,
-        payload: {
-            id,
-            newTaskStatus
-        }
+        payload: id
+
     }
 };
 
-export const changeTaskName = (newTaskName) => {
+export const changeTaskName = (id, newTaskName) => {
     return {
         type: CHANGE_TASK_DESCRIPTION,
-        payload: newTaskName
+        payload: {
+            id,
+            newTaskName
+        }
     }
 };

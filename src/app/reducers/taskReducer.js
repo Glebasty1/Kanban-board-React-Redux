@@ -1,9 +1,8 @@
 import { ADD_TASK, REMOVE_TASK , CHANGE_STATUS, CHANGE_TASK_DESCRIPTION} from '../constants/Page.js';
-import { fromJS } from 'immutable';
+import { List } from 'immutable';
 
 
-const defaultState =
-    [
+const defaultState = [
             {
                 id: 0,
                 description: "Clean room",
@@ -60,17 +59,28 @@ const taskReducer =  (state = defaultState, action) => {
             break;
         case CHANGE_STATUS:
             return state.map((task) => {
-                console.log(task);
-                if (task.id === action.payload.id) {
-                    task.status = action.payload.newTaskStatus;
+                if (task.id === action.payload) {
+                    task.status = "in progress";
                 }
+                return task;
             });
             break;
         case CHANGE_TASK_DESCRIPTION:
-            return state.set([0, 'description'], action.payload);
+            return state.map((task) => {
+                if (task.id === action.payload.id) {
+                    task.description = action.payload.newTaskName;
+                }
+                return task;
+            });
             break;
+
     }
     return state;
 };
 
 export default taskReducer;
+
+
+/*case CHANGE_TASK_DESCRIPTION:
+ return state.set([0, 'description'], action.payload);
+ break;*/
